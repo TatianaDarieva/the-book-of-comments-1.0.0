@@ -19,6 +19,40 @@ module.exports = {
         }
     },
     Mutation: {
+        async userCreate(_, { userInput: {firstName, lastName}}) {
+            const userId = generateId()
+            const createdUser = new User({
+                _id: userId,
+                firstName: firstName,
+                lastName: lastName
+            })
+            const res = await createdUser.save()
 
+            return {
+                id: res.id,
+                ...res._doc
+            }
+        },
+        async userUpdateById(_, { userInput: {userId, firstName, lastName}}){
+            const objectId = new mongoose.Types.ObjectId(userId)
+
+            const wasUpdated = (await User.updateOne(
+                {_id: objectId},
+                {firstName: firstName, lastName: lastName}
+            )).modifiedCount;
+            if(wasUpdated > 0) {
+                const updatedUser = await User.findById(objectId)
+                return updatedUser
+            } else {
+                console.log('User update failed or no changes were made')
+            }
+        },
+
+        async userDeleteById(_, { userId } ) {
+            const objectId = new mongoose.Types.ObjectId(userId)
+            const wasDeleted = (await User.deleteOne(
+                {_id: userId})).deletedCount;
+            return wasDeleted
+        }
     }
 }

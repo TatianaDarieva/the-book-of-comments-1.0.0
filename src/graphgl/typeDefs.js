@@ -31,7 +31,7 @@ input CommentFields {
 }
 
 type Query {
-    usersGetAll(amount: Int): [User]
+    userGetAll(amount: Int): [User]
     userGetById(userId: ID!): User
     commentGetAll(amount: Int): [Comment]
     commentGetById(commentId: ID): Comment

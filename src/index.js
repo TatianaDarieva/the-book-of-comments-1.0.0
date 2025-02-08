@@ -12,9 +12,9 @@ const server = new ApolloServer({
 const connectDB = async() => {
     try {
         await mongoose.connect(MONGODB)
-        console.log('MongoDB connected successfully')
+        console.log('MongoDB connected successfully');
     } catch (err){
-        console.log(err.message)
+        console.log(err.message);
         process.exit(1)
     }
 }

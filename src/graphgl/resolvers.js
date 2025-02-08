@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const User = require('../models/User');
+const Comment = require('../models/Comment')
 const generateId = require('../utils/generateId')
 
 module.exports = {
@@ -12,7 +13,7 @@ module.exports = {
         },
 
         async commentGetAll(_, { amount }) {
-            return await Comment.find().sort({createdAt: -1}.limit(amount))
+            return await Comment.find().sort({createdAt: -1}).limit(amount)
         },
         async commentById(_, { commentId }) {
             return await Comment.findById(new mongoose.Types.ObjectId(commentId))

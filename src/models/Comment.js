@@ -1,5 +1,5 @@
+const {model, Schema } = require('mongoose')
 const mongoose = require('mongoose')
-const { Schema } = require('mongoose')
 mongoose.Schema.Types.String.set('trim', true)
 
 const commentSchema =
@@ -26,7 +26,8 @@ const commentSchema =
     description: {
         type: String
     }
-})
+});
 
-const Comment = mongoose.model('Comment', commentSchema)
-module.exports = Comment
+// const Comment = mongoose.model('Comment', commentSchema)
+// module.exports = Comment
+module.exports = model('Comment', commentSchema)

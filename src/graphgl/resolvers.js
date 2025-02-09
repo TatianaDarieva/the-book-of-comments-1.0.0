@@ -54,6 +54,22 @@ module.exports = {
             const wasDeleted = (await User.deleteOne(
                 {_id: userId})).deletedCount;
             return wasDeleted
-        }
+        },
+
+        // async commentCreate(_, { commentInput: {rating, title, description}}){
+        //     const commentId = generateId()
+        //     const createdComment = new Comment({
+        //         _id: commentId,
+        //         rating: Number,
+        //         title: title,
+        //         description: description
+        //     })
+        //     const res = await createdComment.save()
+        //
+        //     return{
+        //         id: res.id,
+        //         ...res._doc
+        //     }
+        // }
     }
 }

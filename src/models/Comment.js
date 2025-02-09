@@ -28,6 +28,5 @@ const commentSchema =
     }
 });
 
-// const Comment = mongoose.model('Comment', commentSchema)
-// module.exports = Comment
+
 module.exports = model('Comment', commentSchema)

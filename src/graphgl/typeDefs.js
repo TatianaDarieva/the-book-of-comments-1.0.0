@@ -35,15 +35,15 @@ type Query {
     userGetAll(amount: Int): [User]
     userGetById(userId: ID!): User
     commentGetAll(amount: Int): [Comment]
-    commentGetById(commentId: ID): Comment
+    commentGetById(commentId: ID!): Comment!
 }
 
 type Mutation {
     userCreate(userInput: UserFields): User
     userUpdateById(userInput: UserFields): User
     userDeleteById(userId: ID): Boolean
-    commentCreate(commentInput: CommentFields): Comment
-    commentUpdateById(commentInput: CommentFields): Comment
+    commentCreate(commentInput: CommentFields): Comment!
+    commentUpdateById(commentInput: CommentFields): Comment!
     commentDeleteById(commentId: ID): Boolean
 }
 

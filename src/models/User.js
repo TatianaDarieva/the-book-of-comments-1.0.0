@@ -15,8 +15,8 @@ const userSchema = new Schema ({
 
     comments: [
         {
-      type: mongoose.Schema.Types.ObjectId,
-            ref: 'Comment'
+          type: mongoose.Types.ObjectId,
+          ref: 'Comment'
     }
     ]
 })

@@ -1,33 +1,31 @@
-const { expect } = requir("chai")
-const User = requir('../../models/User')
-const request = requir('supertest')
+const { expect } = require("chai")
+const User = require('../../models/User')
+const gqlRequest = require('../gqlRequest')
+const {userCreateQ, user} = require('./data')
+
+let postData = null
+let respData = null
+
+before('DELETE MANY', () => {
+    User.deleteMany({})
+    console.log('Users are deleted')
+})
 
 describe('USER CREATE', () => {
     describe('USER CREATE - POSITIVE TESTS', () => {
-        it("user create", (done) => {
-             request('http://localhost:5000')
-                .post('/')
-                .send(
-                    {
-                        query: `mutation UserCreate($userInput: UserFields) {
-  userCreate(userInput: $userInput) {
-    firstName
-    lastName
-    _id
-  }
-}`,
-                        variables: {
-                            userInput: {
-                                firstName: 'firstName',
-                                lastName: 'lastName'
-                            }
-                        }
-                    }
-                )
+        it("user create1", (done) => {
+
+            postData = {
+                query: userCreateQ,
+                variables: user
+            }
+
+            gqlRequest(postData)
+
                 .expect(200)
                 .end((err, res) => {
                     if (err) return done(err)
-                    const respData = res.body.data.userCreate
+                    respData = res.body.data.userCreate
                     expect(respData.firstName).eq('firstName')
                     expect(respData.lastName).eq('lastName')
                     console.log(respData)
